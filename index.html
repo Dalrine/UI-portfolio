@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dalrine Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #222;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px;
+            position: relative;
+
+
+        }
+
+
+
+        .right-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .left-button,
+        .right-button {
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: white;
+            border-radius: 50px;
+            transition: 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .left-button:hover,
+        .right-button:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #000;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+
+        .intro {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .intro img {
+            width: 320px;
+
+        }
+
+        .intro-text {
+            max-width: 700px;
+
+        }
+
+        .intro-text h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .intro-text p {
+            font-size: 22px;
+            line-height: 1.6;
+        }
+
+        /* Gallery */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* Always 2 side by side */
+            gap: 30px;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            text-align: center;
+
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .divider {
+            width: 60%;
+            height: 2px;
+            background-color: #ddd;
+            margin: 10px auto;
+        }
+
+        p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        footer {
+            background: #f2f2f2;
+            text-align: center;
+            padding: 40px 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        footer h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: black;
+            font-weight: 700;
+        }
+
+        footer h2 span {
+            display: inline-block;
+            border-bottom: 5px solid rgba(74, 119, 255, 0.3);
+        }
+
+        .social-icons {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            color: black;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: #000;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        footer p {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #4a77ff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: none;
+            /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        #backToTop:hover {
+            background: #2e50c5;
+            transform: translateY(-5px);
+        }
+
+        /* MEDIA QUERIES */
+        @media (max-width: 768px) {
+            .right-buttons {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background: white;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .right-buttons.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .gallery-container {
+                grid-template-columns: 1fr;
+                /* Stack on mobile */
+            }
+
+            footer p {
+                font-size: 0.8rem;
+            }
+
+            #backToTop {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <a href="index.html"><button class="left-button">Dalrine</button></a>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="right-buttons" id="menu">
+            <a href="About.html"><button class="right-button">About</button></a>
+
+            <a href="#gallery-container"><button class="right-button">Projects</button></a>
+            <a href="dalrine_cv[1].pdf" target="_blank" rel="noopener noreferrer">
+                <button class="right-button">Resume</button>
+            </a>
+
+
+        </div>
+    </div>
+
+    <!-- INTRO SECTION -->
+    <section class="intro">
+        <img src="src/Avatar.png" alt="Dalrine Avatar">
+        <div class="intro-text">
+            <h1>Hi, I'm Dalrine,</h1>
+            <p>A passionate UI/UX designer dedicated to creating intuitive and impactful digital experiences.</p>
+        </div>
+    </section>
+
+
+    <!-- PROJECT GALLERY -->
+
+    <div class="gallery-container" id="gallery-container">
+
+
+        <div class="gallery-item">
+            <a href="project2.html"><img src="src/2project landing.png" alt="Image 2" /></a>
+            <h2>Penzu Secure Diary & Journal (Redesign)</h2>
+            <div class="divider"></div>
+            <p>A digital journaling space with a soothing interface, designed to make writing feel natural and personal.
+            </p>
+        </div>
+        <div class="gallery-item">
+            <a href="project3.html"><img src="src/3project landing.png" alt="Image 3" /></a>
+            <h2>Shedrive Ride Booking App</h2>
+            <div class="divider"></div>
+            <p>SheDrive is a ride-sharing app designed exclusively for women, by women.
+                Its core mission is to offer a safer, more empowering transportation experience.</p>
+        </div>
+        <div class="gallery-item">
+            <a href="project1.html"><img src="src/1project landing.png" alt="Image 1" /></a>
+            <h2>Vijitha Yapa Online Book Store (Redesign)</h2>
+            <div class="divider"></div>
+            <p>A responsive online bookshop with browsing, purchasing, and personalized recommendations.</p>
+        </div>
+        <div class="gallery-item">
+            <img src="src/Rectangle 98.png" alt="Image 4" />
+            <h2>Shadow Play, an online platform (website + mobile app) for crime and thriller movies.</h2>
+            <div class="divider"></div>
+            <p>Shadow Play is a digital streaming platform focusing exclusively on crime and thriller movies, offering a
+                curated experience for fans of the genre.</p>
+        </div>
+    </div>
+    <footer>
+        <h2><span>👋 LET’S GET IN TOUCH!</span></h2>
+
+        <div class="social-icons">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=adalitfdo@email.com" target="_blank">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+
+        <p>DESIGNED AND CODED BY DALRINE FERNANDO</p>
+
+        <button id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    </footer>
+    <script>
+        function toggleMenu() {
+            document.getElementById("menu").classList.toggle("show");
+        }
+        const backToTop = document.getElementById('backToTop');
+
+        window.onscroll = () => {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                backToTop.style.display = "flex";
+            } else {
+                backToTop.style.display = "none";
+            }
+        };
+
+        // Smooth scroll to top
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>

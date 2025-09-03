@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page with Navbar</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* Apply Poppins font to the entire body */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        /* Background image container */
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 75%;
+            background: url("P3IMG/Cover.png") no-repeat center center/cover;
+            z-index: -1;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px;
+            position: relative;
+
+
+        }
+
+        .right-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .left-button,
+        .right-button {
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: white;
+            border-radius: 50px;
+            transition: 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .left-button:hover,
+        .right-button:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #000;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+
+        /* Container below the image */
+
+        .container {
+            display: flex;
+
+            align-items: left;
+            /* Vertically center the text */
+            width: 100%;
+
+        }
+
+        .section {
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+
+        .section h4 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #333;
+
+        }
+
+        .section p {
+            margin: 10px 0 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #555;
+            /* Text color */
+        }
+
+        .normal-width {
+            padding-left: 200px;
+            /* Add padding to the left */
+            padding-right: 200px;
+        }
+
+        .normal-width h2 {
+            font-size: 2em;
+            margin-bottom: 50px;
+            margin-top: 50px;
+        }
+
+        .normal-width h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .normal-width p {
+            margin: 10px 0 0;
+            font-size: 1em;
+        }
+
+        /* At-a-Glance Section */
+
+        .at-a-glance {
+            padding-top: 60vh;
+            text-align: left;
+
+            padding-left: 200px;
+            /* Add padding to the left */
+            padding-right: 200px;
+
+        }
+
+        .at-a-glance h2 {
+            font-size: 2em;
+            margin-bottom: 50px;
+            margin-top: 50px;
+        }
+
+        .at-a-glance h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .at-a-glance p {
+            margin: 10px 0 0;
+            font-size: 1em;
+        }
+
+        .scroll-image {
+            opacity: 0;
+            transform: translateY(40px);
+            /* start lower */
+            transition: transform 600ms cubic-bezier(.22, .9, .28, 1), opacity 600ms ease;
+            will-change: transform, opacity;
+        }
+
+        .scroll-image.show {
+            opacity: 1;
+            transform: translateY(0);
+            /* end at original position */
+        }
+
+        /* optional: improve performance on mobile */
+        .scroll-image {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        footer {
+            background: #FFE9EA;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: black;
+            font-weight: 700;
+        }
+
+        footer h2 span {
+            display: inline-block;
+            border-bottom: 5px solid rgba(74, 119, 255, 0.3);
+        }
+
+        .social-icons {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            color: black;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: #4a77ff;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .footer-buttons {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-buttons a {
+            padding: 12px 25px;
+            background: #4a77ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: background 0.3s ease, transform 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-buttons a:hover {
+            background: #2e50c5;
+            transform: translateY(-3px);
+        }
+
+        footer p {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #4a77ff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: none;
+            /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        #backToTop:hover {
+            background: #2e50c5;
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 1200px) {
+            .navbar {
+                padding: 20px 30px;
+            }
+
+            .normal-width {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .at-a-glance {
+                padding-left: 100px;
+                padding-right: 100px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .normal-width {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .at-a-glance {
+                padding-left: 50px;
+                padding-right: 50px;
+            }
+
+            .container {
+                flex-direction: column;
+                /* Stack items vertically on smaller screens */
+            }
+
+            .background-image {
+                background: url("P3IMG/Android\ Medium\ -\ 1.png") no-repeat center center/cover;
+            }
+
+            .section {
+                padding: 20px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .right-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+
+
+            .normal-width {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .at-a-glance {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .right-buttons {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background: white;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .right-buttons.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            footer h2 {
+                font-size: 1.5rem;
+            }
+
+            .social-icons a {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .footer-buttons a {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            footer p {
+                font-size: 0.8rem;
+            }
+
+            #backToTop {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+
+
+        }
+
+        @media (max-width: 480px) {
+
+
+
+            .at-a-glance {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .section {
+                padding: 10px;
+                text-align: left;
+            }
+
+            .right-buttons {
+                gap: 5px;
+            }
+
+            .right-buttons {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background: white;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .right-buttons.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .footer-buttons a {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="background-image"></div>
+
+     <div class="navbar">
+        <a href="index.html"><button class="left-button">Dalrine</button></a>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="right-buttons" id="menu">
+            <a href="About.html"><button class="right-button">About</button></a>
+            <a href="index.html#gallery-container"><button class="right-button">Projects</button></a>
+            <a href="dalrine_cv[1].pdf" target="_blank" rel="noopener noreferrer">
+                <button class="right-button">Resume</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="at-a-glance">
+        <div>
+            <h2>At-a-Glance</h2>
+            <p><strong>Project Type:</strong> Ride-hailing and transportation service platform</p>
+            <p><strong>Focus:</strong> Safe, comfortable, and women-exclusive transportation.</p>
+            <p><strong>Primary Goal:</strong> To provide women with a secure, trusted, and empowering
+                travel option by connecting female passengers with female drivers.</p>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h3>Timeline</h3>
+                <p>4 Weeks</p>
+            </div>
+            <div class="section">
+                <h3>My Role</h3>
+                <p>UI/UX Designer</p>
+            </div>
+            <div class="section">
+                <h3>Platform</h3>
+                <p>Figma</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="normal-width">
+        <h2>Overview</h2>
+        <p>
+            She Drive is a women-focused transportation and delivery platform designed to provide safe, comfortable, and
+            reliable services exclusively for women passengers and women drivers. The platform also allows women to send
+            packages securely to other women, ensuring privacy, trust, and safety.
+        </p>
+    </div>
+
+    <div class="normal-width">
+        <h2>Problem</h2>
+        <p>
+            Many women feel unsafe using traditional ride-hailing services, especially at night
+            or in unfamiliar areas. Additionally, sending personal packages
+            through standard courier services can raise concerns about privacy
+            and trust. There is a need for a safe, female-exclusive solution
+            for both transportation and small-scale delivery
+        </p>
+    </div>
+
+
+    <div class="normal-width">
+        <h2>Solution</h2>
+        <p> She Drive offers two core services: </p>
+
+        <P><strong>1. Women-to-Women Rides </strong> – Female drivers providing safe rides exclusively for women
+            passengers.</P>
+
+        <P> <strong>2.Women-to-Women Deliveries</strong> – Women can send packages to other women with trusted
+            female
+            couriers.
+        </p>
+    </div>
+    <div class="normal-width">
+        <h2>key features</h2>
+        <img src="P3IMG/key features.png" alt="Persona" width="98%" class="scroll-image">
+
+    </div>
+    <br>
+    <br>
+    <div class="normal-width">
+        <h2>Features and Iterations</h2>
+
+        <br>
+        <br>
+
+
+        <div style=" display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <video width="30%" autoplay loop muted>
+                <source src="P3IMG/ProtoType1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <div style="width: 40%; font-size: 1.2rem; line-height: 1.5;">
+                <h3>Register Process</h3>
+                <p>A simple and secure registration process ensures women users can create accounts confidently.</p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+
+
+            <div style="width: 40%; font-size: 1.2rem; line-height: 1.5;">
+                <h3> Ride Booking Process</h3>
+                <p>Booking a ride is designed to be fast and stress-free.</p>
+            </div>
+            <video width="30%" autoplay loop muted>
+                <source src="P3IMG/ProtoType2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <br>
+        <br>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <video width="30%" autoplay loop muted>
+                <source src="P3IMG/ProtoType3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <div style="width: 40%; font-size: 1.2rem; line-height: 1.5;">
+                <h3>Package Sending Process</h3>
+                <p>Sending packages is made convenient and secure for women.
+                    Users provide sender and receiver details, package information, and schedule pickup/delivery
+                    times.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class=" normal-width" class="scroll-image">
+        <h2>Process</h2>
+        <video width="98%" autoplay loop muted>
+            <source src="P3IMG/process.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="normal-width">
+        <h2>Persona</h2>
+        <img src="P3IMG/persona.png" alt="Persona" width="98%" class="scroll-image">
+
+    </div>
+    <div class="normal-width">
+        <h2>User Journey Map</h2>
+        <img src="P3IMG/journeymap.png" alt="User Journey Map" width="98%" class="scroll-image">
+    </div>
+    <div>
+        <!-- <h2>Paper First</h2>
+            <p>Initial sketches and wireframes to define key features, such as simplified categories and
+                product
+                pages</p>
+            <img src="project1images/paperprototype.png" alt="Paper ProtoType" width="98%">
+        </div> -->
+        <div class="normal-width">
+            <h2> Wireframes</h2>
+            <!-- <p>
+                Using Figma, paper sketches were converted into wireframes and later into high-fidelity
+                prototypes
+            </p>-->
+            <h3>Low-Fidelity</h3>
+            <img src="P3IMG/lowfidelity.png" alt="Wireframes" width="98%" class="scroll-image">
+            <h3>High-fidelity</h3>
+            <br>
+            <img src="P3IMG/highfidelity.png" alt="high-fidelity ProtoType" width="98%" class="scroll-image">
+
+        </div>
+
+        <div class="normal-width">
+            <h2>Design System</h2>
+            <img src="P3IMG/Color.png" alt="high-fidelity ProtoType" width="98%" class="scroll-image">
+
+            <P>
+            <ul>
+                <li> <strong>Color Palette:</strong>
+                    <br>
+                    <strong>High contrast</strong> between bright accents (#FF4081, #FFBC0C) and softer tones
+                    (#FFF1F5,
+                    #8D6E71)
+                    improves
+                    readability.
+                    <br>
+                    <strong>Consistent mood</strong> — the warm pinks and amber create a friendly, inviting
+                    emotional
+                    tone, while
+                    white
+                    adds clarity and mauve grounds the design.
+                    <br>
+                    <strong> Emotionally engaging</strong> — vibrant pinks express energy and empowerment, softer
+                    blush
+                    tones add
+                    comfort,
+                    and amber suggests optimism.
+                    <br>
+
+                </li>
+                <li> <strong>complementary</strong>
+                    friendly, energetic, and approachable complementary palette that balances warmth and trust.
+                    It’s especially suitable for a women-to-women service because it mixes empowerment (Hot pink),
+                    energy (yellow), and comfort (soft blush + white) while keeping a professional tone with dusty
+                    mauve.<br>
+                </li><br>
+
+
+                <li> <strong>Typography:</strong>
+                    <br> <strong>Font Family: </strong>Montserrat (Google Fonts)
+                    <br> <strong>Font Colors: </strong>Black (#000000), Dusty Mauve #8D6E71
+
+
+                </li><br>
+
+                <li><strong> Icons & Imagery:</strong> Minimal line-style icon.<br>
+                </li>
+            </ul>
+            </p>
+
+
+
+            <div>
+                <h2>Impact</h2>
+                <p>Enhanced safety and trust for women passengers and senders.<br>
+                    <br>
+                <p>Empowerment and income opportunities for women drivers..<br>
+                    <br>
+                <p>Increased comfort and confidence in ride-hailing and package delivery..<br>
+                    <br>
+
+                    <br>
+                </p>
+
+                <h2>What I Learned</h2>
+                <p>
+
+                    Trust is the true feature — safety-first branding and functionality aren’t “extras”; they’re
+                    core to adoption.<br><br>
+                    Designing for women’s unique needs requires empathy + active listening to uncover pain points
+                    beyond the obvious.<br><br>
+                    Usability testing early prevents major redesign costs later.<br><br>
+                    A clear, intuitive information architecture directly impacts how safe and confident users feel
+                    in-app <br><br>
+                </p>
+
+
+                <h2>Future Improvements</h2>
+                <p>
+                    <strong>Expand to new cities & rural areas </strong>
+                    to increase accessibility for women with limited transport options.<br><br>
+                    <strong> Introduce subscription plans</strong>
+                    for frequent riders and package senders to make services more affordable.<br><br>
+                    <strong> AI-based safety alerts</strong>
+                    that monitor unusual route changes and automatically notify emergency contacts.<br><br>
+
+
+                </p>
+            </div>
+            </p>
+        </div>
+    </div>
+    <footer>
+        <h2><span>👋 LET’S GET IN TOUCH!</span></h2>
+
+        <div class="social-icons">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=adalitfdo@email.com" target="_blank">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+
+        <div class="footer-buttons">
+            <a href="project2.html"><i class="fas fa-arrow-left"></i> Previous</a>
+            <a href="project1.html">Next <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <p>DESIGNED AND CODED BY DALRINE FERNANDO</p>
+        <button id="backToTop"><i class="fas fa-chevron-up"></i></button>
+    </footer>
+
+    <div>
+        <script>
+            function toggleMenu() {
+                document.getElementById("menu").classList.toggle("show");
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                const items = document.querySelectorAll('.scroll-image');
+
+                if ('IntersectionObserver' in window) {
+                    const observerOptions = {
+                        root: null,
+                        rootMargin: '0px 0px -10% 0px', // trigger slightly before the bottom enters
+                        threshold: 0.12                 // 12% visible
+                    };
+
+                    const observer = new IntersectionObserver((entries, obs) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const el = entry.target;
+                                const delay = parseInt(el.dataset.delay || '0', 10);
+                                // optional stagger using data-delay (milliseconds)
+                                setTimeout(() => {
+                                    el.classList.add('show');
+                                }, delay);
+                                obs.unobserve(el); // animate only once
+                            }
+                        });
+                    }, observerOptions);
+
+                    items.forEach(i => observer.observe(i));
+                } else {
+                    // Fallback for very old browsers: simple on-scroll check
+                    const onScrollCheck = () => {
+                        const viewportHeight = window.innerHeight;
+                        items.forEach(el => {
+                            if (el.classList.contains('show')) return;
+                            const rect = el.getBoundingClientRect();
+                            if (rect.top < viewportHeight * 0.9 && rect.bottom > 0) {
+                                const delay = parseInt(el.dataset.delay || '0', 10);
+                                setTimeout(() => el.classList.add('show'), delay);
+                            }
+                        });
+                    };
+
+                    window.addEventListener('scroll', onScrollCheck);
+                    window.addEventListener('resize', onScrollCheck);
+                    onScrollCheck(); // initial check
+                }
+            });
+
+            const backToTop = document.getElementById('backToTop');
+
+            window.onscroll = () => {
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    backToTop.style.display = "flex";
+                } else {
+                    backToTop.style.display = "none";
+                }
+            };
+
+            // Smooth scroll to top
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        </script>
+
+</body>

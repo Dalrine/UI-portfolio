@@ -8,6 +8,7 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
         /* Apply Poppins font to the entire body */
@@ -25,28 +26,45 @@
         }
 
         /* Background image container */
+
         .background-image {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 75%;
-            background: url("project1images/Thumbnail.jpg") no-repeat center center/cover;
+            height: 75vh;
+            /* scales with viewport */
+            background-image: url("project1images/Cover1.png");
+            background-position: center;
+            /* centers the image */
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* scales image to cover container */
             z-index: -1;
+            /* stays behind navbar and content */
         }
 
+
+
         /* Style for the navbar container */
+        /* NAVBAR */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 30px 40px;
             position: relative;
-            width: 100%;
-            background: transparent;
+
+
         }
 
-        /* Style for buttons */
+
+
+        .right-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
         .left-button,
         .right-button {
             color: black;
@@ -56,23 +74,33 @@
             font-size: 16px;
             font-weight: bold;
             background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
             border-radius: 50px;
-            transition: box-shadow 0.3s ease;
+            transition: 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        /* Hover effect for buttons */
         .left-button:hover,
         .right-button:hover {
-            opacity: 0.8;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
         }
 
-        /* Style for the right buttons container */
-        .right-buttons {
-            display: flex;
-            gap: 15px;
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
         }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #000;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
 
         /* Container below the image */
 
@@ -108,7 +136,7 @@
 
         /* At-a-Glance Section */
         .at-a-glance {
-            margin-top: 30%;
+            padding-top: 60vh;
             text-align: left;
 
             padding-left: 200px;
@@ -135,6 +163,132 @@
             font-size: 1em;
         }
 
+        .scroll-image {
+            opacity: 0;
+            transform: translateY(40px);
+            /* start lower */
+            transition: transform 600ms cubic-bezier(.22, .9, .28, 1), opacity 600ms ease;
+            will-change: transform, opacity;
+        }
+
+        .scroll-image.show {
+            opacity: 1;
+            transform: translateY(0);
+            /* end at original position */
+        }
+
+        /* optional: improve performance on mobile */
+        .scroll-image {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        footer {
+            background: #F2C09F;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: black;
+            font-weight: 700;
+        }
+
+        footer h2 span {
+            display: inline-block;
+            border-bottom: 5px solid rgba(74, 119, 255, 0.3);
+        }
+
+        .social-icons {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            color: black;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: #4a77ff;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .footer-buttons {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-buttons a {
+            padding: 12px 25px;
+            background: #4a77ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: background 0.3s ease, transform 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-buttons a:hover {
+            background: #2e50c5;
+            transform: translateY(-3px);
+        }
+
+        footer p {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #4a77ff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: none;
+            /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        #backToTop:hover {
+            background: #2e50c5;
+            transform: translateY(-5px);
+        }
+
         @media (max-width: 1200px) {
             .navbar {
                 padding: 20px 30px;
@@ -147,8 +301,12 @@
         }
 
         @media (max-width: 992px) {
-            .navbar {
+
+            /* .navbar {
                 padding: 15px 20px;
+            } */
+            .background-image {
+                background: url("project1images/Cover\ 2.png") no-repeat center center/cover;
             }
 
             .at-a-glance {
@@ -168,26 +326,69 @@
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                text-align: center;
-            }
 
             .right-buttons {
                 flex-direction: column;
                 gap: 10px;
             }
 
+
+
             .at-a-glance {
                 padding-left: 20px;
                 padding-right: 20px;
             }
+
+            .right-buttons {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background: white;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .right-buttons.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            footer h2 {
+                font-size: 1.5rem;
+            }
+
+            .social-icons a {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .footer-buttons a {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            footer p {
+                font-size: 0.8rem;
+            }
+
+            #backToTop {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+
         }
 
+
         @media (max-width: 480px) {
-            .navbar {
-                padding: 10px;
-            }
+
 
             .at-a-glance {
                 padding-left: 10px;
@@ -200,21 +401,59 @@
             }
 
             .right-buttons {
-                gap: 5px;
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background: white;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .right-buttons.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .footer-buttons {
+                flex-direction: column;
+            }
+
+            .footer-buttons a {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="background-image"></div>
+    <div class="background-image">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 100px;">
 
+        </div>
+
+    </div>
     <div class="navbar">
-        <button class="left-button">Dalrine</button>
-        <div class="right-buttons">
-            <button class="right-button">About</button>
-            <button class="right-button">Projects</button>
-            <button class="right-button">Resume</button>
+        <a href="index.html"><button class="left-button">Dalrine</button></a>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="right-buttons" id="menu">
+            <a href="About.html"><button class="right-button">About</button></a>
+            <a href="index.html#gallery-container"><button class="right-button">Projects</button></a>
+            <a href="dalrine_cv[1].pdf" target="_blank" rel="noopener noreferrer">
+                <button class="right-button">Resume</button>
+            </a>
         </div>
     </div>
 
@@ -223,7 +462,8 @@
             <h2>At-a-Glance</h2>
             <p><strong>Project Type:</strong> Website Redesign</p>
             <p><strong>Focus:</strong> Enhancing user experience on the bookshop’s online platform.</p>
-            <p><strong>Primary Goal:</strong> Improve navigation, simplify checkout, and modernize the visual design for
+            <p><strong>Primary Goal:</strong> Improve navigation, simplify checkout, and modernize the visual design
+                for
                 better user engagement.</p>
         </div>
         <div class="container">
@@ -240,6 +480,7 @@
                 <p>Figma</p>
             </div>
         </div>
+
         <div>
             <h2>Problem</h2>
             <p>
@@ -248,10 +489,12 @@
             </p>
 
             <p> <strong>2. </strong>Overwhelming Homepage: A cluttered homepage with too many options.</p>
-            <p> <strong>3. </strong>Slow Checkout Process: The checkout experience was lengthy and confusing, leading to
+            <p> <strong>3. </strong>Slow Checkout Process: The checkout experience was lengthy and confusing,
+                leading to
                 cart
                 abandonment.</p>
-            <p> <strong>4. </strong>Outdated Visual Design: The website looked old-fashioned and didn’t appeal to modern
+            <p> <strong>4. </strong>Outdated Visual Design: The website looked old-fashioned and didn’t appeal to
+                modern
                 book
                 shoppers.
             </p>
@@ -279,30 +522,30 @@
             <br>
             <br>
 
-            <video controls width="90%">
+            <video width="98%" autoplay loop muted>
                 <source src="project1images/prototype1.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
         <div>
             <h2>Process</h2>
-            <img src="project1images/Process.png" alt="Process" width="98%">
+            <img src="project1images/Process.png" alt="Process" width="98%" class="scroll-image">
         </div>
         <div>
             <h2>Persona</h2>
-            <img src="project1images/persona.png" alt="Persona" width="98%">
+            <img src="project1images/persona.png" alt="Persona" width="98%" class="scroll-image">
 
         </div>
         <div>
             <h2>User Journey Map</h2>
-            <img src="project1images/user Journey Map.png" alt="User Journey Map" width="98%">
+            <img src="project1images/user Journey Map.png" alt="User Journey Map" width="98%" class="scroll-image">
         </div>
         <div>
             <h2>Paper First</h2>
             <p>Initial sketches and wireframes to define key features, such as simplified categories and
                 product
                 pages</p>
-            <img src="project1images/paperprototype.png" alt="Paper ProtoType" width="98%">
+            <img src="project1images/paperprototype.png" alt="Paper ProtoType" width="98%" class="scroll-image">
         </div>
         <div>
             <h2> From Paper to Digital</h2>
@@ -311,10 +554,10 @@
                 prototypes
             </p>
             <h3>Wireframes</h3>
-            <img src="project1images/wireframe.png" alt="Wireframes" width="98%">
+            <img src="project1images/wireframe.png" alt="Wireframes" width="98%" class="scroll-image">
             <h3>High-fidelity</h3>
             <br>
-            <img src="project1images/highfidelity.png" alt="high-fidelity ProtoType" width="98%">
+            <img src="project1images/highfidelity.png" alt="high-fidelity ProtoType" width="98%" class="scroll-image">
 
         </div>
 
@@ -351,7 +594,7 @@
             </p>
             <div>
                 <h2>Design Changes</h2>
-                <img src="project1images/compair.png" alt="BEFORE AND AFTER" width="98%">
+                <img src="project1images/compair.png" alt="BEFORE AND AFTER" width="98%" class="scroll-image">
             </div>
             <div>
                 <h2>User Testing (A/B Testing for Redesign)</h2>
@@ -363,11 +606,13 @@
                     <br>
                     <strong> Test Scenarios:</strong><br>
                     <br>
-                    <strong> Homepage Layout:</strong> Testing user interaction with the new homepage design, including
+                    <strong> Homepage Layout:</strong> Testing user interaction with the new homepage design,
+                    including
                     product
                     recommendations, genres, and search options.<br>
 
-                    <strong>Product Page Navigation : </strong>Comparing how easily users could find books and product
+                    <strong>Product Page Navigation : </strong>Comparing how easily users could find books and
+                    product
                     details
                     on the new
                     design.<br>
@@ -392,30 +637,36 @@
                 </ul>
                 </p>
                 <h2>Key Takeaways</h2>
-                <p><strong>Minimalistic Design Improves Usability: </strong> The simplified design led to better user
+                <p><strong>Minimalistic Design Improves Usability: </strong> The simplified design led to better
+                    user
                     navigation, with
                     clearer information and fewer distractions.<br>
                     <br>
-                    <strong> Personalized Suggestions Matter:</strong> Users preferred the curated book recommendations
+                    <strong> Personalized Suggestions Matter:</strong> Users preferred the curated book
+                    recommendations
                     on the homepage,
                     leading to more time spent browsing and higher engagement.<br>
                     <br>
-                    <strong> Faster Checkout Boosts Conversion Rates:</strong> The streamlined, guest-friendly checkout
+                    <strong> Faster Checkout Boosts Conversion Rates:</strong> The streamlined, guest-friendly
+                    checkout
                     significantly
                     improved the purchasing flow, reducing friction in the final stages of the user journey.
                 </p>
 
                 <h2>Final Thoughts</h2>
-                <p>The A/B testing results demonstrate that the redesigned bookshop website increased user engagement,
+                <p>The A/B testing results demonstrate that the redesigned bookshop website increased user
+                    engagement,
                     improved navigation, and enhanced the checkout experience, making book shopping easier and more
                     enjoyable.</p>
 
                 <h2>Future Improvements</h2>
-                <p><strong> Implement AI-Powered Recommendations:</strong> By leveraging machine learning, we can offer
+                <p><strong> Implement AI-Powered Recommendations:</strong> By leveraging machine learning, we can
+                    offer
                     even more
                     personalized book recommendations to further increase engagement.<br>
                     <br>
-                    <strong> Expand to Audiobooks & E-books:</strong> Introducing digital formats to cater to diverse
+                    <strong> Expand to Audiobooks & E-books:</strong> Introducing digital formats to cater to
+                    diverse
                     user preferences and
                     increase the product offering.
                 </p>
@@ -424,6 +675,91 @@
         </div>
     </div>
 
+    <footer>
+        <h2><span>👋 LET’S GET IN TOUCH!</span></h2>
+
+        <div class="social-icons">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=adalitfdo@email.com" target="_blank">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+
+        <div class="footer-buttons">
+            <a href="project3.html"><i class="fas fa-arrow-left"></i> Previous</a>
+           
+        </div>
+
+        <p>DESIGNED AND CODED BY DALRINE FERNANDO</p>
+        <button id="backToTop"><i class="fas fa-chevron-up"></i></button>
+    </footer>
+    <script>
+        function toggleMenu() {
+            document.getElementById("menu").classList.toggle("show");
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const items = document.querySelectorAll('.scroll-image');
+
+            if ('IntersectionObserver' in window) {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px 0px -10% 0px', // trigger slightly before the bottom enters
+                    threshold: 0.12                 // 12% visible
+                };
+
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const el = entry.target;
+                            const delay = parseInt(el.dataset.delay || '0', 10);
+                            // optional stagger using data-delay (milliseconds)
+                            setTimeout(() => {
+                                el.classList.add('show');
+                            }, delay);
+                            obs.unobserve(el); // animate only once
+                        }
+                    });
+                }, observerOptions);
+
+                items.forEach(i => observer.observe(i));
+            } else {
+                // Fallback for very old browsers: simple on-scroll check
+                const onScrollCheck = () => {
+                    const viewportHeight = window.innerHeight;
+                    items.forEach(el => {
+                        if (el.classList.contains('show')) return;
+                        const rect = el.getBoundingClientRect();
+                        if (rect.top < viewportHeight * 0.9 && rect.bottom > 0) {
+                            const delay = parseInt(el.dataset.delay || '0', 10);
+                            setTimeout(() => el.classList.add('show'), delay);
+                        }
+                    });
+                };
+
+                window.addEventListener('scroll', onScrollCheck);
+                window.addEventListener('resize', onScrollCheck);
+                onScrollCheck(); // initial check
+            }
+
+        });
+        const backToTop = document.getElementById('backToTop');
+
+        window.onscroll = () => {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                backToTop.style.display = "flex";
+            } else {
+                backToTop.style.display = "none";
+            }
+        };
+
+        // Smooth scroll to top
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 
 </body>
 
